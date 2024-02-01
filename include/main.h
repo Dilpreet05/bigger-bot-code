@@ -35,6 +35,11 @@
 #define PROS_USE_LITERALS
 
 #include "api.h"
+#include "SubsystemHeaders/drive.hpp"
+#include "SubsystemHeaders/flywheel.hpp"
+#include "SubsystemHeaders/intake.hpp"
+#include "SubsystemHeaders/piston.hpp"
+#
 
 /**
  * You should add more #includes here
