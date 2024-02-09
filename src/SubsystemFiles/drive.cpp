@@ -8,12 +8,12 @@ ez::Drive chassis ({-20,-19,-18}, {13,12,11}, 15 ,3.5,600,1.666);
 
 void updateDrive(){
 
-        if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP) == 1){
+        // if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP)){
+        //         forwardBackwardLoop();
+        // }
+
+        if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)){
                 isArcade = !isArcade;
-        }
-
-        if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT) == 1){
-
         }
 
 
@@ -29,18 +29,14 @@ void updateDrive(){
         pros::delay(50);
 }
 
-void forwardBackwardLoop(){
+void forwardBackwardLoop(){        
 
-        if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A) == 1){
-                loop = !loop;
-        }
-
-        while(loop){
+        while(true){
 
                 skillsCycle();
                 
-                if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A) == 1){
-                        loop = !loop;
+                if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP)){
+                        break;
 
                 }
                 pros::delay(50);
