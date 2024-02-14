@@ -8,9 +8,10 @@ ez::Drive chassis ({-20,-19,-18}, {13,12,11}, 15 ,3.5,600,1.666);
 
 void updateDrive(){
 
-        // if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP)){
-        //         forwardBackwardLoop();
-        // }
+        if(master.get_digital(pros::E_CONTROLLER_DIGITAL_UP)){
+                chassis.drive_imu_reset();
+                skillsCycle();
+        }
 
         if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)){
                 isArcade = !isArcade;
@@ -24,24 +25,24 @@ void updateDrive(){
         }
         
 
-
-
         pros::delay(50);
 }
 
-void forwardBackwardLoop(){        
+// void forwardBackwardLoop(){        
 
-        while(true){
+//         chassis.drive_imu_reset();
 
-                skillsCycle();
+//         while(true){
+
+//                 skillsCycle();
                 
-                if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP)){
-                        break;
+//                 if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP)){
+//                         break;
 
-                }
-                pros::delay(50);
-        }
+//                 }
+//                 pros::delay(50);
+//         }
 
-}
+// }
 
 

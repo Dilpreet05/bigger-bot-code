@@ -46,14 +46,23 @@ void match(){
   chassis.pid_drive_set(-48_in,DRIVE_SPEED,true);
   chassis.pid_wait();
 
+  wingsDown();
 
-  // pros::delay(10000);
+
+  chassis.pid_turn_set(360,TURN_SPEED/2,true);
+  chassis.pid_wait();
+  wingsUp();
 
 
-  chassis.pid_drive_set(45_in,DRIVE_SPEED,true);
+  pros::delay(2000);
+
+
+  chassis.pid_drive_set(47_in,DRIVE_SPEED,true);
   chassis.pid_wait();
 
   grabberDown();
+  chassis.drive_angle_set(0);
+
 
 
   for(int k = 0; k < 9; k++){
@@ -77,8 +86,13 @@ void match(){
   // chassis.pid_drive_set(10_in,DRIVE_SPEED);
   // chassis.pid_wait();
 
-  chassis.pid_turn_set(45_deg,TURN_SPEED);
+  chassis.pid_turn_set(60_deg,TURN_SPEED);
   chassis.pid_wait();
+
+  chassis.pid_drive_set(-15_in,DRIVE_SPEED,true);
+  chassis.pid_wait();
+
+  chassis.pid_turn_set(45_deg,TURN_SPEED);
 
   chassis.pid_drive_set(-24_in,DRIVE_SPEED,true);
   chassis.pid_wait();
@@ -98,19 +112,45 @@ void matchCycle(){
 }
 
 void skills(){
-  
+  intakeSpin();
+  spinFW();
+
+  for(int k = 0; k < 4; k ++){
+    skillsCycle();
+  }
+
+  chassis.pid_drive_set(-45_in,DRIVE_SPEED,true);
+  chassis.pid_wait();
+
+  chassis.pid_turn_set(-45_deg,TURN_SPEED);
+  chassis.pid_wait();
+
+  chassis.pid_drive_set(-12_in,DRIVE_SPEED,true);
+  chassis.pid_wait();
+
+  wingsDown();
+  chassis.pid_swing_set(ez::RIGHT_SWING,45_deg,SWING_SPEED);
+  chassis.pid_wait();
+
+  chassis.pid_drive_set(-24_in,DRIVE_SPEED,true);
+  chassis.pid_wait();
+
+
 }
 
 
 void skillsCycle(){
 
   grabberDown();
+  pros::delay(250);
   chassis.pid_drive_set(-10_in,DRIVE_SPEED);
   chassis.pid_wait();
 
   grabberUp();
+  pros::delay(100);
   chassis.pid_drive_set(10_in,DRIVE_SPEED);
   chassis.pid_wait();
+  pros::delay(600);
 
 }
 
