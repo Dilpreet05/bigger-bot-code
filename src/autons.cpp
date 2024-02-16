@@ -115,25 +115,10 @@ void skills(){
   intakeSpin();
   spinFW();
 
-  for(int k = 0; k < 4; k ++){
+  for(int k = 0; k < 22; k ++){
     skillsCycle();
   }
 
-  chassis.pid_drive_set(-45_in,DRIVE_SPEED,true);
-  chassis.pid_wait();
-
-  chassis.pid_turn_set(-45_deg,TURN_SPEED);
-  chassis.pid_wait();
-
-  chassis.pid_drive_set(-12_in,DRIVE_SPEED,true);
-  chassis.pid_wait();
-
-  wingsDown();
-  chassis.pid_swing_set(ez::RIGHT_SWING,45_deg,SWING_SPEED);
-  chassis.pid_wait();
-
-  chassis.pid_drive_set(-24_in,DRIVE_SPEED,true);
-  chassis.pid_wait();
 
 
 }
