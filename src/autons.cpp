@@ -46,13 +46,11 @@ void match(){
   chassis.pid_drive_set(-48_in,DRIVE_SPEED,true);
   chassis.pid_wait();
 
-  wingsDown();
-
+  grabberDown();
 
   chassis.pid_turn_set(360,TURN_SPEED/2,true);
   chassis.pid_wait();
-  wingsUp();
-
+  grabberUp();
 
   pros::delay(2000);
 
@@ -94,9 +92,11 @@ void match(){
 
   chassis.pid_turn_set(45_deg,TURN_SPEED);
 
-  chassis.pid_drive_set(-24_in,DRIVE_SPEED,true);
+  chassis.pid_drive_set(-30_in,DRIVE_SPEED,true);
   chassis.pid_wait();
 
+  chassis.pid_drive_set(10_in,DRIVE_SPEED);
+  chassis.pid_wait();
 
 
 
