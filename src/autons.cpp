@@ -39,77 +39,171 @@ void default_constants() {
 // Make your own autonomous functions here!
 // . . .
 
+/* Auto used when we want to shoot as many match loads as possible across the middle */
 
-void match(){
-  reset();
-  
-  chassis.pid_drive_set(-48_in,DRIVE_SPEED,true);
-  chassis.pid_wait();
+void matchFar(){
 
-  grabberDown();
+  scoreAllianceTriball();
 
-  chassis.pid_turn_set(360,TURN_SPEED/2,true);
-  chassis.pid_wait();
-  grabberUp();
+  /* Begin cycling */
+  spinFW();
+  for(int k = 0; k < 8; k++){
+    matchCycleFar();
+  }
+  /* End cyclining */
 
-  pros::delay(2000);
+  touchHangBar();
 
-
-  chassis.pid_drive_set(47_in,DRIVE_SPEED,true);
-  chassis.pid_wait();
-
-  grabberDown();
-  chassis.drive_angle_set(0);
+}
 
 
+/* Auto used when we want to shoot our match loads towards the right side of the net */
 
-  for(int k = 0; k < 9; k++){
+void matchClose(){
 
-    matchCycle();
+  scoreAllianceTriball();
 
+  /* Begin cycling */
+  spinFW();
+  for(int k = 0; k < 4; k++){
+    matchCycleClose();
   }
 
+  /* End cyclining */
 
-  chassis.pid_turn_set(-90_deg,TURN_SPEED);
+  touchHangBar();
+
+
+}
+
+void scoreAllianceTriball(){
+    /* This block of code scores the alliance color triball into the opposite alliance net */
+
+  reset();
+  chassis.drive_angle_set(-45);
+
+  grabberDown();
+  pros::delay(500);
+
+  chassis.pid_drive_set(-62,60,true);
   chassis.pid_wait();
 
+  // chassis.pid_swing_set(ez::RIGHT_SWING, 0, TURN_SPEED);
+  chassis.pid_turn_set(0, TURN_SPEED);
+  chassis.pid_wait();
+
+  outtake();
+  pros::delay(1000);
   grabberUp();
+  // pros::delay(500);
   
+  chassis.pid_drive_set(22,DRIVE_SPEED,true);
+  chassis.pid_wait();
 
-  chassis.pid_drive_set(18_in,DRIVE_SPEED);
+  chassis.pid_drive_set(-15,DRIVE_SPEED,true);
+  chassis.pid_wait();
+  stopIntake();
+
+
+  chassis.pid_turn_set(180,50);
+  chassis.pid_wait();
+
+  chassis.pid_drive_set(-23,127,true);
+  chassis.pid_wait();
+
+  chassis.pid_drive_set(18,DRIVE_SPEED,true);
   chassis.pid_wait();
 
 
-
-  // chassis.pid_drive_set(10_in,DRIVE_SPEED);
-  // chassis.pid_wait();
-
-  chassis.pid_turn_set(60_deg,TURN_SPEED);
+  chassis.pid_turn_set(0,50);
   chassis.pid_wait();
 
-  chassis.pid_drive_set(-15_in,DRIVE_SPEED,true);
+  chassis.pid_drive_set(-17,DRIVE_SPEED,true);
   chassis.pid_wait();
 
-  chassis.pid_turn_set(45_deg,TURN_SPEED);
 
-  chassis.pid_drive_set(-30_in,DRIVE_SPEED,true);
+  
+  // chassis.pid_swing_set(ez::RIGHT_SWING, -45, TURN_SPEED);
+  chassis.pid_turn_set(-45, TURN_SPEED);
   chassis.pid_wait();
 
-  chassis.pid_drive_set(10_in,DRIVE_SPEED);
+  chassis.pid_drive_set(65,DRIVE_SPEED,true);
   chassis.pid_wait();
 
+  /* End of scoring the alliance triball */
+}
+
+void matchCycleClose(){
+
+  grabberDown();
+  pros::delay(500);
+  chassis.pid_drive_set(-23,DRIVE_SPEED,true);
+  chassis.pid_wait();
+
+
+  // chassis.pid_swing_set(ez::RIGHT_SWING,0,TURN_SPEED/2);
+  chassis.pid_turn_set(0,TURN_SPEED/2);
+  chassis.pid_wait();
+
+  chassis.pid_drive_set(-15_in,DRIVE_SPEED/1.5,true);
+  chassis.pid_wait();
+  
+  grabberUp();
+  intakeSpin();
+  pros::delay(250);
+
+  chassis.pid_drive_set(13_in,DRIVE_SPEED);
+  chassis.pid_wait();
+  stopIntake();
+
+
+   
+
+  // chassis.pid_swing_set(ez::RIGHT_SWING,-45,TURN_SPEED);
+  chassis.pid_turn_set(-45,TURN_SPEED);
+  chassis.pid_wait();
+
+  chassis.pid_drive_set(25,DRIVE_SPEED,true);
+  chassis.pid_wait();
+
+  
+}
+
+void matchCycleFar(){
+
+
+  grabberDown();
+  pros::delay(500);
+  chassis.pid_drive_set(-15_in,DRIVE_SPEED);
+  chassis.pid_wait();
+  intakeSpin();
+  grabberUp();
+  chassis.pid_drive_set(15_in,DRIVE_SPEED);
+  chassis.pid_wait();
+  pros::delay(500);
+  stopIntake();
 
 
 }
 
-void matchCycle(){
-  pros::delay(600);
-  chassis.pid_turn_set(-45_deg,TURN_SPEED);
-  chassis.pid_wait();  
+void touchHangBar(){
 
-  chassis.pid_turn_set(0_deg,TURN_SPEED);
+  /* go touch the bar for AWP */
+
+  chassis.pid_drive_set(-33,DRIVE_SPEED,true);
   chassis.pid_wait();
+
+  chassis.pid_swing_set(ez::LEFT_SWING, -135,TURN_SPEED);
+  chassis.pid_wait();
+
+  chassis.pid_drive_set(25,DRIVE_SPEED,true);
+  chassis.pid_wait_until(18);  
+  grabberDown();
+  stopFW();
+
 }
+
+
 
 void skills(){
   intakeSpin();
@@ -173,6 +267,8 @@ void spinFW(){
 void stopFW(){
   flywheel1 = 0;
   flywheel2 = 0;
+  flywheel1.brake();
+  flywheel2.brake();
 }
 
 void intakeSpin(){ // intake triballs for flywheel or controlling
@@ -447,3 +543,74 @@ void interfered_example() {
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait();
 }
+
+// void match(){
+//   
+  
+//   chassis.pid_drive_set(-48_in,DRIVE_SPEED,true);
+//   chassis.pid_wait();
+
+//   grabberDown();
+
+//   chassis.pid_turn_set(360,TURN_SPEED/2,true);
+//   chassis.pid_wait();
+//   grabberUp();
+
+//   pros::delay(2000);
+
+
+//   chassis.pid_drive_set(47_in,DRIVE_SPEED,true);
+//   chassis.pid_wait();
+
+//   grabberDown();
+//   chassis.drive_angle_set(0);
+
+
+
+//   for(int k = 0; k < 9; k++){
+
+//     matchCycleClose();
+
+//   }
+
+
+//   chassis.pid_turn_set(-90_deg,TURN_SPEED);
+//   chassis.pid_wait();
+
+//   grabberUp();
+  
+
+//   chassis.pid_drive_set(18_in,DRIVE_SPEED);
+//   chassis.pid_wait();
+
+
+
+//   // chassis.pid_drive_set(10_in,DRIVE_SPEED);
+//   // chassis.pid_wait();
+
+//   chassis.pid_turn_set(60_deg,TURN_SPEED);
+//   chassis.pid_wait();
+
+//   chassis.pid_drive_set(-15_in,DRIVE_SPEED,true);
+//   chassis.pid_wait();
+
+//   chassis.pid_turn_set(45_deg,TURN_SPEED);
+
+//   chassis.pid_drive_set(-30_in,DRIVE_SPEED,true);
+//   chassis.pid_wait();
+
+//   chassis.pid_drive_set(10_in,DRIVE_SPEED);
+//   chassis.pid_wait();
+
+
+
+// }
+
+// void matchCycleClose(){
+//   pros::delay(600);
+//   chassis.pid_turn_set(-45_deg,TURN_SPEED);
+//   chassis.pid_wait();  
+
+//   chassis.pid_turn_set(0_deg,TURN_SPEED);
+//   chassis.pid_wait();
+// }

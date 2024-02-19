@@ -19,7 +19,8 @@ void default_constants();
 
 
 void skills();
-void match();
+void matchFar();
+void matchClose();;
 
 
 /* Methods that control subsystems */
@@ -38,8 +39,11 @@ void rightWingUp();
 void wingsUp();
 
 
+void scoreAllianceTriball();
+void matchCycleClose();
+void matchCycleFar();
+void touchHangBar();
 
-void matchCycle();
 void skillsCycle();
 void endOfSkills();
 void startOfSkills();

@@ -10,7 +10,7 @@ void updateDrive(){
 
         if(master.get_digital(pros::E_CONTROLLER_DIGITAL_UP)){
                 chassis.drive_imu_reset();
-                skillsCycle();
+                matchCycleFar();
         }
 
         if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)){
@@ -27,6 +27,8 @@ void updateDrive(){
 
         pros::delay(50);
 }
+
+/* Redundent Code */
 
 // void forwardBackwardLoop(){        
 
