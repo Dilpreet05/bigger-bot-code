@@ -197,7 +197,7 @@ void touchHangBar(){
   chassis.pid_wait();
 
   chassis.pid_drive_set(25,DRIVE_SPEED,true);
-  chassis.pid_wait_until(18);  
+  chassis.pid_wait_until(22);  
   grabberDown();
   stopFW();
 
