@@ -65,7 +65,7 @@ void matchClose(){
 
   /* Begin cycling */
   spinFW();
-  for(int k = 0; k < 4; k++){
+  for(int k = 0; k < 3; k++){
     matchCycleClose();
   }
 
@@ -108,7 +108,7 @@ void scoreAllianceTriball(){
   chassis.pid_turn_set(180,50);
   chassis.pid_wait();
 
-  chassis.pid_drive_set(-23,127,true);
+  chassis.pid_drive_set(-22,127,true);
   chassis.pid_wait();
 
   chassis.pid_drive_set(18,DRIVE_SPEED,true);
