@@ -23,7 +23,7 @@ void initialize() {
 
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.autons_add({
-    // Auton("Match Close: ", matchClose),
+    Auton("Match Close: ", matchClose),
     Auton("Match Far: ", matchFar),
     Auton("Skills: ", skills),
     Auton("Tune Forward/Backward: ", tuneForwardBackward),

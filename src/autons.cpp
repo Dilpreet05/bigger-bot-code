@@ -85,7 +85,7 @@ void scoreAllianceTriball(){
   grabberDown();
   pros::delay(500);
 
-  chassis.pid_drive_set(-62,60,true);
+  chassis.pid_drive_set(-62,40,true);
   chassis.pid_wait();
 
   // chassis.pid_swing_set(ez::RIGHT_SWING, 0, TURN_SPEED);
